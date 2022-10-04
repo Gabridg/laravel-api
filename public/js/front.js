@@ -1947,7 +1947,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "PostCard"
+  name: "PostCard",
+  props: {
+    post: Object
+  }
 });
 
 /***/ }),
@@ -1962,9 +1965,14 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+
+/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
   name: "PostsList",
+  components: {
+    PostCard: _PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       posts: []
@@ -1972,8 +1980,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fetchPosts: function fetchPosts() {
+      var _this = this;
+
       axios.get("http://127.0.0.1:8000/api/posts").then(function (res) {
-        console.log(res.data);
+        _this.posts = res.data;
       })["catch"](function (err) {
         console.error(err);
       }).then(function () {
@@ -1983,11 +1993,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.fetchPosts();
-  },
-  components: {
-    PostCard: _PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
-});
+}, "components", {
+  PostCard: _PostCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+}));
 
 /***/ }),
 
@@ -2091,7 +2100,19 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div");
+  return _c("div", {
+    staticClass: "card text-center"
+  }, [_c("div", {
+    staticClass: "card-header"
+  }, [_vm._v("\n        " + _vm._s(_vm.post.slug) + "\n    ")]), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v(_vm._s(_vm.post.content))])]), _vm._v(" "), _c("div", {
+    staticClass: "card-footer text-muted"
+  }, [_c("p", [_vm._v(_vm._s(_vm.post.created_at))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.post.created_at))])])]);
 };
 
 var staticRenderFns = [];
@@ -2122,6 +2143,7 @@ var render = function render() {
   }, [_c("h2", [_vm._v("Posts")]), _vm._v(" "), _vm.posts.length ? _c("div", _vm._l(_vm.posts, function (post) {
     return _c("PostCard", {
       key: post.id,
+      staticClass: "mb-3",
       attrs: {
         post: post
       }
@@ -50023,6 +50045,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var root = new Vue({
   el: '#root',
