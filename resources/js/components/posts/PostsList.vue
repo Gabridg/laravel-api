@@ -1,20 +1,39 @@
 <template>
     <div class="posts-list">
-        <h2>Posts</h2>
-        <ul>
-            <li></li>
-        </ul>
+        <div class="container">
+            <h2>Posts</h2>
+            <div v-if="posts.length">
+                <PostCard v-for="post in posts" :key="post.id" :post="post"></PostCard>
+            </div>
+            <h2 v-else>Nessun post</h2>
+        </div>
     </div>
 </template>
 
 <script>
+import PostCard from './PostCard.vue';
 export default {
     name: "PostsList",
     data() {
         return {
             posts: []
         };
-    }
+    },
+    methods: {
+        fetchPosts() {
+            axios.get("http://127.0.0.1:8000/api/posts").then(res => {
+                console.log(res.data);
+            }).catch(err => {
+                console.error(err);
+            }).then(() => {
+                console.info("chiamata terminata");
+            });
+        }
+    },
+    mounted() {
+        this.fetchPosts();
+    },
+    components: { PostCard }
 }
 </script>
 
