@@ -7,8 +7,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
+                    <li v-for="link in links" :key="link.name" class="nav-item active">
+                        <router-link class="nav-link" :to="{name: link.name }">{{link.label}}</router-link>
                     </li>
                 </ul>
             </div>
@@ -19,9 +19,21 @@
 <script>
 export default {
     name: "MainHeader",
+    data() {
+        return {
+
+            links: [
+                { name: 'home', label: 'Home' },
+                { name: 'about', label: 'About' },
+                { name: 'contacts', label: 'Contacts' },
+            ]
+        }
+    }
 }
 </script>
 
 <style>
-
+header {
+    border-bottom: 5px solid #666;
+}
 </style>
