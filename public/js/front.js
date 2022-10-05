@@ -2112,7 +2112,7 @@ var render = function render() {
     staticClass: "card-text"
   }, [_vm._v(_vm._s(_vm.post.content))])]), _vm._v(" "), _c("div", {
     staticClass: "card-footer text-muted"
-  }, [_c("p", [_vm._v(_vm._s(_vm.post.created_at))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.post.created_at))])])]);
+  }, [_c("p", [_vm._v(_vm._s(_vm.post.category.label))]), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.post.author.name))])])]);
 };
 
 var staticRenderFns = [];

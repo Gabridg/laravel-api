@@ -8,8 +8,8 @@
             <p class="card-text">{{post.content}}</p>
         </div>
         <div class="card-footer text-muted">
-            <p>{{post.created_at}}</p>
-            <p>{{post.created_at}}</p>
+            <p>{{post.category.label}}</p>
+            <p>{{post.author.name}}</p>
         </div>
     </div>
 </template>
